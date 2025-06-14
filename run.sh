@@ -8,7 +8,7 @@ if [[ ! -f "$COMPOSE_DIR/docker-compose.yml" ]]; then
   exit 1
 fi
 
-echo "Starting `docker compose` in $COMPOSE_DIR"
+echo "Starting docker compose in $COMPOSE_DIR"
 cd "$COMPOSE_DIR" || exit 1
 (docker compose up) &
 
