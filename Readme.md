@@ -28,3 +28,12 @@ On the host:
 sudo apt install wmctrl
 
 -> ./run.sh # starts everything and positions window
+
+## Autostart?
+
+You just have to edit this file
+sudo nano .config/lxsession/LXDE-pi/autostart
+
+Add this command to run a script (in this example is called shboot.sh)
+
+@lxterminal -e /home/pi/shboot.sh
