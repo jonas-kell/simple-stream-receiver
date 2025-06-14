@@ -1,7 +1,3 @@
-Might require:
-
-<!-- xhost +local:docker -->
-
 Requires on Windows:
 
 OBS
@@ -26,6 +22,7 @@ Output:
 On the host:
 Docker installation required
 Wmctrl and X11 required (see below).
+Requires Setting: `xhost +local:docker`
 
 -> `sudo ./run.sh` # starts everything an positions window
 
@@ -43,8 +40,15 @@ Add this command to run a script (in this example is called shboot.sh)
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install wmctrl
-sudo apt-get install docker.io
-sudo apt-get install docker-compose
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker $USER
+sudo systemctl enable docker
+sudo systemctl start docker
+mkdir -p ~/.docker/cli-plugins/
+ARCH=$(uname -m)
+curl -SL https://github.com/docker/compose/releases/download/v2.36.2/docker-compose-linux-$ARCH -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
 
 Set the session to X11:
 sudo nano /etc/lightdm/lightdm.conf
