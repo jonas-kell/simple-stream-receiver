@@ -8,6 +8,9 @@ if [[ ! -f "$COMPOSE_DIR/docker-compose.yml" ]]; then
   exit 1
 fi
 
+# setting the xhost because this might reset it seems
+xhost +local:docker
+
 echo "Starting docker compose in $COMPOSE_DIR"
 cd "$COMPOSE_DIR" || exit 1
 (docker compose up) &

@@ -22,18 +22,8 @@ Output:
 On the host:
 Docker installation required
 Wmctrl and X11 required (see below).
-Requires Setting: `xhost +local:docker`
 
 -> `sudo ./run.sh` # starts everything an positions window
-
-## Autostart?
-
-You just have to edit this file
-sudo nano .config/lxsession/LXDE-pi/autostart
-
-Add this command to run a script (in this example is called shboot.sh)
-
-@lxterminal -e /home/pi/shboot.sh
 
 ## Fresh Installation on a Raspberry Pi 3B
 
