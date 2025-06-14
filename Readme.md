@@ -62,7 +62,7 @@ nano ~/.config/autostart/stream.desktop
 [Desktop Entry]
 Type=Application
 Name=Stream
-Exec=lxterminal -e /home/wall/Desktop/simple-stream-receiver/run.sh
+Exec=lxterminal -e bash -c "cd /home/wall/Desktop/simple-stream-receiver/ && ./run.sh"
 Path=/home/wall/Desktop/simple-stream-receiver/
 X-GNOME-Autostart-enabled=true
 
