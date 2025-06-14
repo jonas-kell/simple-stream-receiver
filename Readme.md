@@ -43,6 +43,7 @@ sudo apt-get install wmctrl
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo usermod -aG docker $USER
+newgrp docker
 sudo systemctl enable docker
 sudo systemctl start docker
 mkdir -p ~/.docker/cli-plugins/
@@ -56,6 +57,19 @@ sudo nano /etc/lightdm/lightdm.conf
 At the Part `[Seat:*]` (probably it reads `LXDE-pi-labwc`)
 user-session=LXDE
 autologin-session=LXDE
+autologin.user=wall # the user of the pi is called wall
+autologin-user-timeout=0
 
-Save, then the command `exho $XDG_SESSION_TYPE` should produce `x11`.
+Save, then the command `echo $XDG_SESSION_TYPE` should produce `x11`.
 And `echo $DESKTOP_SESSION` should yield `LXDE`.
+On re-log you should also immediately boot into desktop now.
+
+Setup Autostart:
+mkdir -p ~/.config/autostart
+nano ~/.config/autostart/stream.desktop
+
+[Desktop Entry]
+Type=Application
+Name=Stream
+Exec=/home/wall/Desktop/simple-stream-receiver/run.sh
+X-GNOME-Autostart-enabled=true
