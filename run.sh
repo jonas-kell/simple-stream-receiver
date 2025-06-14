@@ -5,6 +5,8 @@ COMPOSE_DIR="${1:-$(pwd)}"
 
 if [[ ! -f "$COMPOSE_DIR/docker-compose.yml" ]]; then
   echo "Error: docker-compose.yml not found in $COMPOSE_DIR"
+  echo "Command failed. Press Enter to close."
+  read
   exit 1
 fi
 
@@ -12,7 +14,11 @@ fi
 xhost +local:docker
 
 echo "Starting docker compose in $COMPOSE_DIR"
-cd "$COMPOSE_DIR" || exit 1
+cd "$COMPOSE_DIR" || {  
+  echo "Command failed. Press Enter to close."
+  read
+  exit 1
+}
 (docker compose up) &
 
 TARGET="rtmp://nginx-rtmp/live/stream"
@@ -36,4 +42,8 @@ while (( COUNT < MAX_TRIES )); do
 done
 
 echo "Failed to find the window after $MAX_TRIES tries."
-exit 1
+{  
+  echo "Command failed. Press Enter to close."
+  read
+  exit 1
+}
