@@ -22,3 +22,9 @@ Output:
 -> CPU veryfast
 -> profile high
 -> tune zerolatency
+
+On the host:
+
+sudo apt install wmctrl
+
+-> ./run.sh # starts everything and positions window
