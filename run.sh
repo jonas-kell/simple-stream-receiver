@@ -13,7 +13,7 @@ cd "$COMPOSE_DIR" || exit 1
 (docker-compose up) &
 
 TARGET="rtmp://nginx-rtmp/live/stream"
-MAX_TRIES=100
+MAX_TRIES=3600
 COUNT=0
 
 while (( COUNT < MAX_TRIES )); do
