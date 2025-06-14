@@ -65,6 +65,7 @@ And `echo $DESKTOP_SESSION` should yield `LXDE`.
 On re-log you should also immediately boot into desktop now.
 
 Setup Autostart:
+sudo apt-get install dex
 mkdir -p ~/.config/autostart
 nano ~/.config/autostart/stream.desktop
 
@@ -72,4 +73,8 @@ nano ~/.config/autostart/stream.desktop
 Type=Application
 Name=Stream
 Exec=/home/wall/Desktop/simple-stream-receiver/run.sh
+Path=/home/wall/Desktop/simple-stream-receiver/
 X-GNOME-Autostart-enabled=true
+
+chmod +x ~/.config/autostart/stream.desktop
+dex ~/.config/autostart/stream.desktop
