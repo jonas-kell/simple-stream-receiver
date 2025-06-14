@@ -37,3 +37,11 @@ sudo nano .config/lxsession/LXDE-pi/autostart
 Add this command to run a script (in this example is called shboot.sh)
 
 @lxterminal -e /home/pi/shboot.sh
+
+
+## Pi installation
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install docker.io
+sudo apt-get install docker-compose
