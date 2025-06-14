@@ -24,10 +24,10 @@ Output:
 -> tune zerolatency
 
 On the host:
+Docker installation required
+Wmctrl and X11 required (see below).
 
-sudo apt install wmctrl
-
--> ./run.sh # starts everything and positions window
+-> `sudo ./run.sh` # starts everything an positions window
 
 ## Autostart?
 
@@ -38,10 +38,20 @@ Add this command to run a script (in this example is called shboot.sh)
 
 @lxterminal -e /home/pi/shboot.sh
 
-
-## Pi installation
+## Fresh Installation on a Raspberry Pi 3B
 
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt install docker.io
+sudo apt-get install wmctrl
+sudo apt-get install docker.io
 sudo apt-get install docker-compose
+
+Set the session to X11:
+sudo nano /etc/lightdm/lightdm.conf
+
+At the Part `[Seat:*]` (probably it reads `LXDE-pi-labwc`)
+user-session=LXDE
+autologin-session=LXDE
+
+Save, then the command `exho $XDG_SESSION_TYPE` should produce `x11`.
+And `echo $DESKTOP_SESSION` should yield `LXDE`.
