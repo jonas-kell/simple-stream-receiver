@@ -68,3 +68,19 @@ X-GNOME-Autostart-enabled=true
 
 chmod +x ~/.config/autostart/stream.desktop
 dex ~/.config/autostart/stream.desktop
+
+Setup a static IP:
+
+sudo mkdir -p /etc/systemd/network
+sudo nano /etc/systemd/network/10-static.network
+
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.4.1/24
+
+sudo systemctl enable systemd-networkd
+sudo systemctl restart systemd-networkd
+networkctl status
+ip a
