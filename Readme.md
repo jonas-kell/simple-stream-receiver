@@ -84,3 +84,10 @@ sudo systemctl enable systemd-networkd
 sudo systemctl restart systemd-networkd
 networkctl status
 ip a
+
+Make the networking delay on boot (as otherwise the switch is not yet ready...)
+
+sudo systemctl edit networking.service
+
+[Service]
+ExecStartPre=/bin/sleep 30
