@@ -92,7 +92,7 @@ sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
 sudo nano /etc/systemd/system/NetworkManager.service.d/delay.conf
 
 [Service]
-ExecStartPre=/bin/sleep 20
+ExecStartPre=/bin/sleep 30
 
 sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
