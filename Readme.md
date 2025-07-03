@@ -71,23 +71,29 @@ dex ~/.config/autostart/stream.desktop
 
 Setup a static IP:
 
-sudo mkdir -p /etc/systemd/network
-sudo nano /etc/systemd/network/10-static.network
+sudo nano /etc/NetworkManager/system-connections/eth0.nmconnection
 
-[Match]
-Name=eth0
+[ipv4]
+address1=192.168.150.150/24,192.168.150.150
+dns=8.8.8.8;1.1.1.1;
+method=manual
 
-[Network]
-Address=192.168.4.1/24
-
-sudo systemctl enable systemd-networkd
-sudo systemctl restart systemd-networkd
-networkctl status
+sudo systemctl restart NetworkManager
 ip a
+
+<!-- Disable `systemd-networkd` (as we use `NetworkManager`).
+sudo systemctl disable --now systemd-networkd.socket
+sudo systemctl disable --now systemd-networkd
+-->
 
 Make the networking delay on boot (as otherwise the switch is not yet ready...)
 
-sudo systemctl edit networking.service
+sudo mkdir -p /etc/systemd/system/NetworkManager.service.d
+sudo nano /etc/systemd/system/NetworkManager.service.d/delay.conf
 
 [Service]
-ExecStartPre=/bin/sleep 30
+ExecStartPre=/bin/sleep 20
+
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo reboot
