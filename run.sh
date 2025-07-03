@@ -21,7 +21,7 @@ cd "$COMPOSE_DIR" || {
 }
 (docker compose up) &
 
-TARGET="rtmp://nginx-rtmp/live/stream"
+TARGET="srt://:9999?mode=listener&latency=10"
 MAX_TRIES=3600
 COUNT=0
 

@@ -1,18 +1,19 @@
 services:
-    nginx-rtmp:
-        image: tiangolo/nginx-rtmp # lightweight nginx with rtmp
-        ports:
-            - "1935:1935" # RTMP port
-        volumes:
-            - ./nginx.conf:/etc/nginx/nginx.conf:ro
-        restart: on-failure
-
-    ffplay:
+    srt-live-transmit:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.lt
+        command: ["srt://:8888?mode=listener&latency=10", "srt://srt-ffplay:9999?mode=caller&latency=10"]
+        restart: unless-stopped
+        ports:
+            - 8888:8888/udp
+
+    srt-ffplay:
+        build:
+            context: .
+            dockerfile: Dockerfile.ff
         depends_on:
-            - nginx-rtmp
+            - srt-live-transmit
         environment:
             - DISPLAY=${DISPLAY}
         volumes:
@@ -31,7 +32,10 @@ services:
                 "-framedrop",
                 "-strict",
                 "experimental",
-                "rtmp://nginx-rtmp/live/stream",
+                "-probesize",
+                "32",
+                "-analyzeduration",
+                "0",
+                "srt://:9999?mode=listener&latency=10",
             ]
         restart: unless-stopped
-        ipc: host

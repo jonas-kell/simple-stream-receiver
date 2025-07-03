@@ -1,0 +1,9 @@
+FROM debian:bookworm
+
+# Install dependencies
+RUN apt update && apt install -y \
+    srt-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+# Default command: play the stream
+ENTRYPOINT ["srt-live-transmit"]

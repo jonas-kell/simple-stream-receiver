@@ -4,8 +4,8 @@ OBS
 
 Stream:
 -> stream to
-rtmp://ip.ip.ip.ip:1935/live
--> Key: "stream"
+srt://ip.ip.ip.ip:8888?mode=caller&latency=10
+-> Key: "" (leave empty)
 -> No authentification
 
 Output:
