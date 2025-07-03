@@ -7,13 +7,14 @@ services:
         restart: unless-stopped
         ports:
             - 8888:8888/udp
+        depends_on:
+            - srt-ffplay
 
     srt-ffplay:
         build:
             context: .
             dockerfile: Dockerfile.ff
-        depends_on:
-            - srt-live-transmit
+
         environment:
             - DISPLAY=${DISPLAY}
         volumes:
