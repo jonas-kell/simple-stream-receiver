@@ -71,20 +71,17 @@ dex ~/.config/autostart/stream.desktop
 
 Setup a static IP:
 
-sudo nano /etc/NetworkManager/system-connections/eth0.nmconnection
+nmcli device status # find the name of the ethernet interface (here name is already filled in as enxb827ebb4ef8c)
 
-[ipv4]
-address1=192.168.150.150/24,192.168.150.150
-dns=8.8.8.8;1.1.1.1;
-method=manual
+nmcli connection modify enxb827ebb4ef8c \
+ ipv4.addresses 192.168.150.150/24 \
+ ipv4.gateway 192.168.150.10 \
+ ipv4.dns "8.8.8.8 1.1.1.1" \
+ ipv4.method manual
 
 sudo systemctl restart NetworkManager
+nmcli connection down enxb827ebb4ef8c && nmcli connection up enxb827ebb4ef8c
 ip a
-
-<!-- Disable `systemd-networkd` (as we use `NetworkManager`).
-sudo systemctl disable --now systemd-networkd.socket
-sudo systemctl disable --now systemd-networkd
--->
 
 Make the networking delay on boot (as otherwise the switch is not yet ready...)
 
@@ -97,3 +94,8 @@ ExecStartPre=/bin/sleep 30
 sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
 sudo reboot
+
+<!-- Disable `systemd-networkd` (as we use `NetworkManager`).
+sudo systemctl disable --now systemd-networkd.socket
+sudo systemctl disable --now systemd-networkd
+-->
