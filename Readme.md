@@ -125,7 +125,7 @@ Modify the connection (Here the IP is pre-filled with `192.168.150.150`, replace
 ```cmd
 nmcli connection modify "Wired connection 1" \
  ipv4.addresses 192.168.150.150/24 \
- ipv4.gateway 192.168.150.10 \
+ ipv4.gateway 192.168.150.1 \
  ipv4.dns "8.8.8.8 1.1.1.1" \
  ipv4.method manual
 

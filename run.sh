@@ -3,8 +3,6 @@
 # Usage: ./start_and_top.sh /path/to/compose-dir
 COMPOSE_DIR="${1:-$(pwd)}"
 
-echo "sleeping 45 seconds until everything is ready"
-sleep 45
 
 if [[ ! -f "$COMPOSE_DIR/docker-compose.yml" ]]; then
   echo "Error: docker-compose.yml not found in $COMPOSE_DIR"
