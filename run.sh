@@ -30,7 +30,7 @@ cd "$COMPOSE_DIR" || {
   read
   exit 1
 }
-(docker compose up) &
+(docker compose up 2>&1 | tee -a "$LOGFILE") &
 
 TARGET="srt://:9999?mode=listener&latency=10"
 MAX_TRIES=3600
